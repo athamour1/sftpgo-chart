@@ -68,6 +68,6 @@ service:
 persistence:
   enabled: true
   pvcs:
-    - name: fiware-fortesie-timescaledb
-      claimName: fiware-fortesie-timescaledb
+    - name: Existing-PVC
+      claimName: Existing-PVC
 ```
