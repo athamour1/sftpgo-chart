@@ -20,7 +20,7 @@ This Helm chart deploys SFTPGo in a Kubernetes application using a Deployment an
 To install the chart with the release name `sftpgo`, run the following command:
 
 ```bash
-helm install sftpgo . -n <namespace>
+helm install sftpgo . -n 
 ```
 
 ## Uninstalling the Chart
@@ -56,7 +56,7 @@ Keep in mind that to mount an already mounted volume is to have `accessModes: - 
 ```yaml
 replicaCount: 1
 
-namespace: fortesie
+namespace: <namespace>
 
 image:
   repository: drakkan/sftpgo
