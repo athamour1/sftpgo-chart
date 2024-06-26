@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-sftpgo-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Release.Name }}-sftpgo
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-sftpgo
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-sftpgo
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: sftp
+              containerPort: 2022
+              protocol: TCP
+          volumeMounts:
+            {{- range .Values.persistence.pvcs }}
+            - name: {{ .name }}
+              mountPath: /opt/{{ .name }}
+            {{- end }}
+      volumes:
+        {{- range .Values.persistence.pvcs }}
+        - name: {{ .name }}
+          persistentVolumeClaim:
+            claimName: {{ .claimName }}
+        {{- end }}

@@ -1,0 +1,17 @@
+replicaCount: 1
+
+namespace: fortesie
+
+image:
+  repository: drakkan/sftpgo
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+
+persistence:
+  enabled: true
+  pvcs:
+    - name: fiware-fortesie-timescaledb
+      claimName: fiware-fortesie-timescaledb

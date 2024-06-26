@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-sftpgo-service
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Release.Name }}-sftpgo
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+    - port: 2022
+      targetPort: 2022
+      protocol: TCP
+      name: sftp
+  selector:
+    app: {{ .Release.Name }}-sftpgo
