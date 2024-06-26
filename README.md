@@ -49,6 +49,7 @@ The following table lists the configurable parameters of the `SFTPGo` chart and 
 ## Values
 
 You can override the default values by specifying them in a `values.yaml` file or by using the `--set` flag during installation.
+Keep in mind that to mount an already mounted volume is to have `accessModes: - ReadWriteMany` in each pvc.
 
 ### Example `values.yaml`
 
